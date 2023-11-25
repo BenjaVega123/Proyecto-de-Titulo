@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Inicio
+{% endblock title %}
+
+
+{% block content %}
+{% if not user.is_authenticated %}
+
+<div class="container" style="padding-left: 5rem;padding-top: 5rem;">
+    <div class="row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">¿Deseas ser parte?</h5>
+                    <p class="card-text">Para interactuar en la plataforma ya sea como <mark>estudiante</mark> o como <mark>secretario</mark> académico debes registrarte en el <u>formulario único de admisión</u></p>
+                    <a href="{% url 'register' %}" class="btn btn-success">Formulario Único</a>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+{% endif %}
+
+{% if user.is_authenticated %}
+    {% if request.user.rol == none %}
+        <div class="container" style="padding-left: 5rem;padding-top: 5rem;">
+            <div class="row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">¡Tu cuenta está casi lista!</h5>
+                            <p class="card-text">Completa tu perfil para utilizar las herramientas de <mark>estudiante</mark> o <mark>secretario</mark></p>
+                            <a href="{% url 'user-update' request.user.id %}" class="btn btn-success">Completar Perfil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    {% endif %}
+{% endif %}
+
+<div class="container" style="padding: 5rem;">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1>
+                Bienvenid@s al sistema de planificación de horarios para la Universidad Andrés Bello!
+            </h1>
+            <p class="lead">
+                Explora las carreras y planifica tu horario académico
+            </p>
+            <a class="btn btn-secondary" href="{% url 'lista_carreras' %}" role="button">Carreras</a>
+        </div>
+        <div class="col-md-6">
+            <h2>¿Para qué sirve?</h2>
+            <p class="lead">Nuesto sistema te permite planificar tus horarios académicos para optimizar tu tiempo y que tengas todo listo para cuando debas tomar ramos.</p>
+            <h2>¿Qué debo hacer?</h2>
+            <p class="lead">Debes navegar por nuestras carreras, escoger la tuya e ir agregando ramos a tu horario según tu semestre, ¡el sistema los pondrá en un calendario para ti!.</p>
+            <h2>¡A prueba de errores!</h2>
+            <p class="lead">Nuestra herramienta evitará que generes conflictos de horarios y te enviará una alerta cuando esto ocurra.</p>
+            <h5>Términos y Condiciones</h2>
+            <a class="btn btn-success" href="{% url 'tyc' %}" role="button">Revisa aquí</a>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

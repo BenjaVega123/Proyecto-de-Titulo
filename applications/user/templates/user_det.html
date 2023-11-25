@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{user.username}}
+{% endblock title %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>Detalles de usuario</h1>
+        </div>
+        
+    </div>
+        <h4>Datos Personales</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">RUT</th>
+                        <th scope="col">Nombre de Usuario</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>                     
+                        <th scope="row"> {{user.RUT}} </th>
+                        <th scope="row"> {{user.username}} </th>
+                        <th scope="row"> {{user.first_name}} </th>
+                        <th scope="row"> {{user.last_name}} </th>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Datos de Contácto</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Carrera</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>                     
+                        <th scope="row"> {{user.email}} </th>
+                        <th scope="row"> {{user.telefono}} </th>
+                        <th scope="row"> {{user.carrera}} </th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-12">
+                <a class="btn btn-warning" href="{% url 'user-update' user.id %}" role="button">Editar mi usuario</a>
+            </div>
+</div>
+{% else %}
+<div class="container" style="padding-top: 3rem;">
+    <h1>Necesitas ingresar para acceder a esta información</h1>
+    
+</div>
+{% endif %}
+    
+
+{% endblock content %}
+    

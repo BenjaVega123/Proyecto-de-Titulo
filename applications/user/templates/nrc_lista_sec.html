@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista NRCs
+{% endblock title %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>Lista de todos los NRCs disponibles hasta el momento</h1>
+        </div>
+        <div class="container" style="padding: 2rem;">
+            <form method="get" action="">
+                Nrc: <input type="text" name="nrc_id" value="{{ request.GET.nrc_id }}">
+                Docente: <input type="text" name="docentes" value="{{ request.GET.docentes }}">
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+        <div class="col-12">
+            <a class="btn btn-warning" href="{% url 'nrc-create-sec' %}" role="button">Añadir NRCs</a>
+        </div>
+    </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">NRC</th>
+                        <th scope="col">Docente</th>
+                        <th scope="col">Ramo</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nrc in NRCs %}
+                    <tr>                     
+                        <th scope="row"> {{nrc.nrc_id}} </th> 
+                        <th scope="row"> {{nrc.docentes.nombres}} {{nrc.docentes.apellidos}} </th> 
+                        <th> {{nrc.ramo_pertenece.nombre}} </th>
+                        <th>
+                            
+                            {% for horario in nrc.horarios.all %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{horario.dia}} de {{horario.hora_inicio}} a {{horario.hora_termino}}</li>
+                            </ul>
+                            {% endfor %}    
+                        </th>
+                        <th> <a class="btn btn-success" href="{% url 'nrc-updt-sec' nrc.id %}" role="button">Editar</a> </th>
+                        <th> <a class="btn btn-danger" href="{% url 'nrc-del-sec' nrc.id %}" role="button">Eliminar</a> </th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+</div>
+{% else %}
+<div class="container" style="padding-top: 3rem;">
+    <h1>Necesitas ingresar para acceder a esta información</h1>
+    
+</div>
+{% endif %}
+    
+
+{% endblock content %}
+    

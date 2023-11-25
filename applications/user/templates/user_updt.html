@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Completar Perfil
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <h1 class="display-4">Sistema de Planificación de Horarios</h1>
+        </blockquote>
+            <p>Para la Universidad Andrés Bello</p>
+      </figure>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="text-left">
+            <form id="formAuthentication" method="POST">{% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">RUT</label>
+                        {{ form.RUT }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nombre de usuario</label>
+                        {{ form.username }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                        {{ form.first_name }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                        {{ form.last_name }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Correo Electrónico</label>
+                        {{ form.email }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Teléfono</label>
+                        {{ form.telefono }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Carrera</label>
+                        {{ form.carrera }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Qué Rol necesitas dentro de nuestra plataforma?</label>
+                        {{ form.asking_rol }}
+                </div>
+                {% if form.non_field_errors %}
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Completar Perfil
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">¡Importante!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        Nuestros administradores revisarán tu solicitud y se verificarán tus datos para asegurarnos que eres un estudiante o secretario de la Universidad Andrés Bello
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+                        <button type="submit" class="btn btn-success">Aceptar</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+        
+
+{% endblock content %}

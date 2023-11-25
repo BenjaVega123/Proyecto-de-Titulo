@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ramo.nombre}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>Detalles de la carrera {{ramo.nombre}} </h1>
+        </div>
+    </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Prerrequisitos</th>
+                    <th scope="col">Correquisitos</th>
+                    <th scope="col">NRCs disponibles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"> {{ramo.codigo}} </th>
+                    <th> {{ramo.nombre}} </th>
+                    <th>
+                        {% for pre in ramo.prerrequisito.all %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{pre.nombre}}</li>
+                            </ul>
+                        {% endfor %}
+                    </th>
+                    <th>
+                        {% for co in ramo.correquisito.all %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{co.nombre}}</li>
+                            </ul>
+                        {% endfor %}
+                    </th>
+                    <th> <a class="btn btn-primary" href="{% url 'lista_nrcs_ramo' ramo.id %}" role="button">Ver</a> </th>
+                </tr>
+            </tbody>
+        </table>
+</div>
+{% endblock content %}
+    

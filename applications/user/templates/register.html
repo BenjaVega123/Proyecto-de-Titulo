@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registro de Usuario
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <h1 class="display-4">Sistema de Planificación de Horarios</h1>
+        </blockquote>
+            <p>Para la Universidad Andrés Bello</p>
+      </figure>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="text-left">
+            <form id="formAuthentication" method="POST">{% csrf_token %}
+                <div class="mb-3">
+                <label for="username_id" class="form-label">{{ form.username.label }}</label>
+                    {{ form.username }}
+                </div>
+                <div class="mb-3">
+                <label for="username_id" class="form-label">{{ form.email.label }}</label>
+                    {{ form.email }}
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">{{ form.password1.label }}</label>
+                        {{ form.password1 }}
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">{{ form.password2.label }}</label>
+                        {{ form.password2 }}
+                </div>
+                <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+                <p class="text-center">
+                    <span>Ya tienes cuenta?</span>
+                    <a href="{% url 'login' %}">
+                        <span>Inicia Sesión</span>
+                    </a>
+                </p>
+            </form>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors.username }}
+                    {{ form.errors.password2 }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+        
+
+{% endblock content %}

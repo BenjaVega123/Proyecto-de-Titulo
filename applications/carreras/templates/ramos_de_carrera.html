@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{carrera.nombre}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>Lista de ramos de la carrera {{carrera.nombre}} </h1>
+        </div>
+        <div class="container" style="padding: 2rem;">
+            <form method="get" action="">
+                Semestre: <input type="text" name="semestre" value="{{ request.GET.semestre }}">
+                Nombre: <input type="text" name="nombre" value="{{ request.GET.nombre }}">
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+    </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Semestre impartido</th>
+                    <th scope="col">Créditos</th>
+                    <th scope="col">Más Información</th>
+                    <th scope="col">NRCs disponibles</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ramo in ramos %}
+                <tr>
+                    <th scope="row"> {{ramo.codigo}} </th>
+                    <th> {{ramo.nombre}} </th>
+                    <th> {{ramo.semestre}} </th>
+                    <th> {{ramo.creditos}} </th>
+                    <th> <a class="btn btn-primary" href="{% url 'ramo-detalle' ramo.id %}" role="button">Ver</a> </th>
+                    <th> <a class="btn btn-primary" href="{% url 'lista_nrcs_ramo' ramo.id %}" role="button">Ver</a> </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+{% endblock content %}
+    

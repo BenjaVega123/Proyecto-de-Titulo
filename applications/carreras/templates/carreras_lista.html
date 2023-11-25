@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Listado Carreras
+{% endblock title %}
+
+
+{% block content %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>Lista de todas las carreras disponibles hasta el momento</h1>
+        </div>
+    </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Semestres totales</th>
+                    <th scope="col">Ramos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for carrera in carreras %}
+                <tr>
+                    <th scope="row"> {{carrera.id}} </th>
+                    <th> {{carrera.nombre}} </th>
+                    <th> {{carrera.semestres_totales}} </th>
+                    <th><a class="btn btn-primary" href="{% url 'lista_ramos_carrera' carrera.id %}" role="button">Ver Ramos</a></th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+{% endblock content %}
+    

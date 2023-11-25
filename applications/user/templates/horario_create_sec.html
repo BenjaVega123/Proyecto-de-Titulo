@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Crear Horario
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="padding-top: 3rem;">
+        <div class="col-12">
+            <form method="POST" id="horario-create-sec-form">{% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Día</label>
+                        {{ form.dia }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Hora de Inicio</label>
+                        {{ form.hora_inicio }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Hora de Término</label>
+                        {{ form.hora_termino }}
+                </div>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // Cuando se envía el formulario, cierra la ventana emergente
+    document.getElementById("horario-create-sec-form").onsubmit = function() {
+        window.opener.location.reload();  // Recarga la página del padre (opcional)
+        window.close();  // Cierra la ventana emergente
+    };
+</script>
+{% endblock content %}
+    

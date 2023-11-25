@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{object.nombre}}
+{% endblock title %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>NRCs del ramo {{NRCs.nombre}} </h1>
+        </div>
+    </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">NRC</th>
+                        <th scope="col">Docente</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Añadir a mi calendario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nrc in object.nrcs.all %}
+                    <tr>                     
+                        <th scope="row"> {{nrc.nrc_id}} </th> 
+                        <th scope="row"> {{nrc.docentes.nombres}} {{nrc.docente.apellidos}}</th> 
+                        <th>
+                            {% for horario in nrc.horarios.all %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{horario.dia}} de {{horario.hora_inicio}} a {{horario.hora_termino}}</li>
+                            </ul>
+                            {% endfor %}    
+                        </th>
+                        <th><button class="boton-agregar" data-nrc={{nrc.nrc_id}}>Añadir</button>{% csrf_token %}</th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        <script>
+            document.querySelectorAll('.boton-agregar').forEach(button => {
+                button.addEventListener('click',function(){
+                    var nrc = this.getAttribute('data-nrc');
+                    fetch(`/agregar-nrc/${nrc}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.errror) {
+                            alert(data.error);
+                        } else {
+                            alert(data.message);
+                            window.location.href = data.redirect_url;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        </script>
+</div>
+{% else %}
+<div class="container" style="padding-top: 3rem;">
+    <h1>Necesitas ingresar para acceder a esta información</h1>
+    
+</div>
+{% endif %}
+    
+
+{% endblock content %}
+    

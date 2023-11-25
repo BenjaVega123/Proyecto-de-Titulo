@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Crear Ramo
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="padding-top: 3rem;">
+        <div class="col-12">
+            <form method="POST" id="window-form">{% csrf_token %}
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label class="form-label">Código</label>
+                                {{ form.codigo }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                                {{ form.nombre }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Créditos</label>
+                                {{ form.creditos }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Semestre donde se imparte</label>
+                                {{ form.semestre }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Profesores</label>
+                                {{ form.profesores }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Carrera donde se imparte</label>
+                                {{ form.carreras }}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label class="form-label">Prerrequisitos</label>
+                                {{ form.prerrequisito }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Correquisitos</label>
+                                {{ form.correquisito }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">NRCs</label>
+                            <p><mark>NO ES NECESARIO QUE INGRESE NRCs SI NO EXISTEN, AL <a class="btn btn-primary" id="abrir-formulario" role="button">CREAR NRCs</a> EN LA PLATAFORMA SE VINCULARÁN AUTOMÁTICAMENTE AL RAMO QUE LE ASIGNE.</mark></p>
+                                {{ form.nrcs }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-outline-success" >Crear</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("abrir-formulario").onclick = function() {
+        // Abre la ventana emergente con el formulario
+        var popup = window.open("/nrc-create-sec/", "Formulario", "width=999,height=400");
+    };
+    document.getElementById("window-form").onsubmit = function() {
+        window.opener.location.reload();  // Recarga la página del padre (opcional)
+        window.close();  // Cierra la ventana emergente
+    };
+</script>
+{% endblock content %}
+    

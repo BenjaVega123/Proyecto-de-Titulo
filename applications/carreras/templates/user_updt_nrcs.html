@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Eliminar NRCs
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="padding-top: 3rem;">
+        <div class="col-12">
+            <form method="POST">{% csrf_token %}
+                <div class="mb-3">
+                    <p>Para eliminar un NRC de tu calendario debes <mark>deseleccionarlo</mark> en la lista de abajo:</p>
+                    <p>Para deseleccionar presiona <mark>ctrl y haz clic</mark> en el NRC:</p>
+                    <label class="form-label">NRCs</label>
+                        
+                        {{ form.nrcs }}
+                </div>
+                <button type="submit" class="btn btn-outline-success" >Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

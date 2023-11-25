@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+    Eliminar Carrera
+{% endblock title %}
+
+{% block content %}
+<div class="container" style="padding: 3rem;">
+    <div class="card mb-4">
+        <h2 class="card-header">Eliminar Carrera: {{object.nombre}}</h2>
+        <div class="card-body">
+            <form class="cell large-10" method="POST">{% csrf_token %}
+                <div class="alert alert-danger" role="alert">¿Está seguro que desea eliminar la carrera?. ¡Esta acción no se puede revertir!</div>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <a class="btn btn-outline-primary" href="#" onclick="window.history.back()">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

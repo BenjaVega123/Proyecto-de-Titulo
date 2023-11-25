@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{object.nombre}}
+{% endblock title %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>NRCs del ramo {{NRCs.nombre}} </h1>
+        </div>
+    </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">NRC</th>
+                        <th scope="col">Docente</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nrc in object.nrcs.all %}
+                    <tr>                     
+                        <th scope="row"> {{nrc.nrc_id}} </th> 
+                        <th> {{nrc.docentes.nombres}} {{nrc.docentes.apellidos}} </th>
+                        <th>
+                            
+                            {% for horario in nrc.horarios.all %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{horario.dia}} de {{horario.hora_inicio}} a {{horario.hora_termino}}</li>
+                            </ul>
+                            {% endfor %}    
+                        </th>
+                        <th> <a class="btn btn-success" href="{% url 'nrc-updt-sec' nrc.id %}" role="button">Editar</a> </th>
+                        <th> <a class="btn btn-danger" href="{% url 'nrc-del-sec' nrc.id %}" role="button">Eliminar</a> </th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+</div>
+{% else %}
+<div class="container" style="padding-top: 3rem;">
+    <h1>Necesitas ingresar para acceder a esta información</h1>
+    
+</div>
+{% endif %}
+    
+
+{% endblock content %}
+    

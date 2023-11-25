@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista Profesores
+{% endblock title %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container" style="padding-top: 3rem;">
+    <div class="row">
+        <div class="col-12">
+            <h1>Lista de todos los Profesores disponibles hasta el momento</h1>
+        </div>
+        <div class="container" style="padding: 2rem;">
+            <form method="get" action="">
+                Rut: <input type="text" name="rut" value="{{ request.GET.rut }}">
+                Nombres: <input type="text" name="nombres" value="{{ request.GET.nombres }}">
+                Apellidos: <input type="text" name="apellidos" value="{{ request.GET.apellidos }}">
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+        
+        {% if request.user.rol == '2' %}
+        <div class="col-12">
+            <a class="btn btn-warning" href="{% url 'prof-create-sec' %}" role="button">Añadir Profesores</a>
+        </div>
+        {% endif %}
+            
+        
+    </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">RUT</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Detalles</th>
+                        
+                        {% if request.user.rol == '2' %}
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                        {% endif %}
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profesor in profesores %}
+                    <tr>                     
+                        <th scope="row"> {{profesor.rut}} </th> 
+                        <th scope="row"> {{profesor.nombres}} </th> 
+                        <th scope="row"> {{profesor.apellidos}} </th> 
+                        <th> <a class="btn btn-primary" href="{% url 'prof-det-sec' profesor.id %}" role="button">Ver</a> </th>
+                        {% if request.user.rol == '2' %}
+                        <th> <a class="btn btn-success" href="{% url 'prof-updt-sec' profesor.id %}" role="button">Editar</a> </th>
+                        <th> <a class="btn btn-danger" href="{% url 'prof-del-sec' profesor.id %}" role="button">Eliminar</a> </th>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+</div>
+{% else %}
+<div class="container" style="padding-top: 3rem;">
+    <h1>Necesitas ingresar para acceder a esta información</h1>
+    
+</div>
+{% endif %}
+    
+
+{% endblock content %}
+    

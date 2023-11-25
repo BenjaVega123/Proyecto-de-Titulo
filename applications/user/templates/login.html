@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Inicia Sesión
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <h1 class="display-4">Sistema de Planificación de Horarios</h1>
+        </blockquote>
+            <p>Para la Universidad Andrés Bello</p>
+      </figure>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="text-left">
+            <form id="formAuthentication" method="POST">{% csrf_token %}
+                <div class="mb-3">
+                <label for="username_id" class="form-label">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    {% if form.errors.username %}
+                        {{ form.errors.username | striptags }}
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">{{ form.password.label }}</label>
+                        {{ form.password }}
+
+                        {% if form.errors.password %}
+                            {{ form.errors.password | striptags }}
+                        {% endif %}
+
+                </div>
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <p class="text-center">
+                    <span>Nuevo en la plataforma?</span>
+                    <a href="{% url 'register' %}">
+                        <span>Crear cuenta</span>
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+        
+
+{% endblock content %}

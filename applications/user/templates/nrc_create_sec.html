@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Crear NRC
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="padding-top: 3rem;">
+        <div class="col-12">
+            <form method="POST" id="window-form">{% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">NRC ID</label>
+                        {{ form.nrc_id }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">A que Ramo pertenece</label>
+                        {{ form.ramo_pertenece }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Horarios</label>
+                        {{ form.horarios }}
+                        <p>¿Necesitas crear otro horario?</p>
+                        <a class="btn btn-success" id="abrir-formulario-1" role="button">Añadir</a>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Docente</label>
+                        {{ form.docentes }}
+                        <p>¿Necesitas crear otro Docente?</p>
+                        <a class="btn btn-success" id="abrir-formulario-2" role="button">Añadir</a>
+                </div>
+                {% if form.non_field_errors %}
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <button type="submit" class="btn btn-outline-success" >Crear NRC</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("abrir-formulario-1").onclick = function() {
+        // Abre la ventana emergente con el formulario
+        var popup = window.open("/horario-create-sec/", "Formulario Horario", "width=600,height=400");
+    };
+    document.getElementById("abrir-formulario-2").onclick = function() {
+        // Abre la ventana emergente con el formulario
+        var popup = window.open("/prof-create-sec/", "Formulario Profesor", "width=600,height=400");
+    };
+    document.getElementById("window-form").onsubmit = function() {
+        window.opener.location.reload();  // Recarga la página del padre (opcional)
+        window.close();  // Cierra la ventana emergente
+    };
+</script>
+{% endblock content %}
+    

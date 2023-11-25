@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Crear Profesor
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="padding-top: 3rem;">
+        <div class="col-12">
+            <form method="POST" id="window-form-prof-create">{% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">RUT</label>
+                        {{ form.rut }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                        {{ form.nombres }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                        {{ form.apellidos }}
+                </div>
+                <div class="">
+                    {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                    {{ form.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-outline-success" >Crear</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("window-form-prof-create").onsubmit = function() {
+        window.opener.location.reload();  // Recarga la página del padre (opcional)
+        window.close();  // Cierra la ventana emergente
+    };
+</script>
+{% endblock content %}
+    

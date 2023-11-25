@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Editar Profesor
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="padding-top: 3rem;">
+        <div class="col-12">
+            <form method="POST">{% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">RUT</label>
+                        {{ form.rut }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                        {{ form.nombres }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                        {{ form.apellidos }}
+                </div>
+                <button type="submit" class="btn btn-outline-success" >Editar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

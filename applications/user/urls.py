@@ -1,0 +1,93 @@
+from django.urls import path
+from applications.user.views import (LogoutView, LoginFormView, RegisterFormView, HomeSecretarios,
+                                     CarreraSecListView, CarreraUpdateView, CarreraDeleteView, CarreraCreateView,
+                                     RamosdeCarreraSec, RamoListView, RamoUpdateView, RamoDeleteView, RamoCreateView,
+                                     RamoDetailView, NRCListView, NRCUpdateView, NRCDeleteView, NRCCreateView,
+                                     HorarioDeNrcsCreateView, UserUpdate, UserDetailView)
+
+urlpatterns = [
+    path('logout/',
+        LogoutView.as_view(),
+        name='logout'
+    ),
+    path('login/',
+        LoginFormView.as_view(),
+        name='login'
+    ),
+    path('register/',
+        RegisterFormView.as_view(),
+        name='register'
+    ),
+    path('home-secretarios/',
+        HomeSecretarios.as_view(),
+        name='home-secretarios'
+    ),
+    path('carrera-lista-sec/',
+        CarreraSecListView.as_view(),
+        name='carrera-lista-sec'
+    ),
+    path('carrera-updt-sec/<int:pk>/',
+        CarreraUpdateView.as_view(),
+        name='carrera-updt-sec'
+    ),
+    path('carrera-del-sec/<int:pk>/',
+        CarreraDeleteView.as_view(),
+        name='carrera-del-sec'
+    ),
+    path('carrera-create-sec/',
+        CarreraCreateView.as_view(),
+        name='carrera-create-sec'
+    ),
+    path('ramos-carrera-sec/<int:pk>/',
+        RamosdeCarreraSec.as_view(),
+        name='ramos-carrera-sec'
+    ),
+    path('ramo-lista-sec/',
+        RamoListView.as_view(),
+        name='ramo-lista-sec'
+    ),
+    path('ramo-updt-sec/<int:pk>/',
+        RamoUpdateView.as_view(),
+        name='ramo-updt-sec'
+    ),
+    path('ramo-del-sec/<int:pk>/',
+        RamoDeleteView.as_view(),
+        name='ramo-del-sec'
+    ),
+    path('ramo-create-sec/',
+        RamoCreateView.as_view(),
+        name='ramo-create-sec'
+    ),
+    path('nrcs-ramo-sec/<int:pk>/',
+        RamoDetailView.as_view(),
+        name='nrcs-ramo-sec'
+    ),
+    path('nrc-lista-sec/',
+        NRCListView.as_view(),
+        name='nrc-lista-sec'
+    ),
+    path('nrc-updt-sec/<int:pk>/',
+        NRCUpdateView.as_view(),
+        name='nrc-updt-sec'
+    ),
+    path('nrc-del-sec/<int:pk>/',
+        NRCDeleteView.as_view(),
+        name='nrc-del-sec'
+    ),
+    path('nrc-create-sec/',
+        NRCCreateView.as_view(),
+        name='nrc-create-sec'
+    ),
+    path('horario-create-sec/',
+        HorarioDeNrcsCreateView.as_view(),
+        name='horario-create-sec'
+    ),
+    path('user-update/<int:pk>/',
+        UserUpdate.as_view(),
+        name='user-update'
+    ),
+    path('user-det/<int:pk>/',
+        UserDetailView.as_view(),
+        name='user-det'
+    ),
+]
